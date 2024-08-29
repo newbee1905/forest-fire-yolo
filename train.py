@@ -18,7 +18,7 @@ parser.add_argument(
 parser.add_argument(
 	"-e", "--epochs",
 	type=int,
-	default=50,
+	default=200,
 )
 parser.add_argument(
 	"-i", "--imgz",
@@ -65,6 +65,13 @@ for i, model in enumerate(models):
 		project=args.project_output, name=model_name,
 		exist_ok=True,
 		workers=args.workers
+		batch=32,
+		lr0=0.001,
+		lrf=0.01,
+		warmup_epochs=5,
+		warmup_bias_lr=0.00001,
+		patience=30,
+		optimizer='AdamW',
 	)
 
 	shutil.copy2(f"{args.project_output}/{model_name}/weights/best.pt", f"{model_name}_best.pt")
