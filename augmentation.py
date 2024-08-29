@@ -75,6 +75,10 @@ def __aug_init__(self, p=1.0):
 			# Simulate shadows from smoke plumes and compression artifacts
 			A.RandomShadow(num_shadows_lower=1, num_shadows_upper=2, shadow_dimension=5, shadow_roi=(0, 0.5, 1, 1), p=0.2),
 			A.ImageCompression(quality_lower=85, p=0.2),
+
+			# YOLOX augmentation
+			A.Mosaic(p=0.5),
+			A.Mixup(p=0.5),
 		]
 
 		# Compose transforms
